@@ -46,3 +46,6 @@ next-env.d.ts
 ai_code/career/venv/
 ai_code/doubt-solving/venv/
 /lib/generated/prisma
+
+__pycache__/
+/venv
