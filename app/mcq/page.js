@@ -41,7 +41,7 @@ function QuizHistoryDisplay({ history, isLoading, error, onSelectQuiz }) {
   }
 
   if (error) {
-    return <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg" role="alert"><p>{error}</p></div>;
+    return <div className="error-box" role="alert"><p>{error}</p></div>;
   }
 
   if (!history || history.length === 0) {
@@ -242,14 +242,14 @@ export default function MCQGeneratorContent() {
             {isReview && selectedHistoryQuiz && (
                 <div className="bg-white p-6 rounded-2xl shadow-lg text-center border-2 border-blue-500">
                     <h2 className="text-2xl font-bold text-gray-800">Reviewing: {selectedHistoryQuiz.topic}</h2>
-                    <p className="text-4xl font-extrabold text-blue-600 my-2">{selectedHistoryQuiz.score} / {selectedHistoryQuiz.totalQuestions}</p>
+                    <p className="text-4xl font-extrabold text-[#20BEFF] my-2">{selectedHistoryQuiz.score} / {selectedHistoryQuiz.totalQuestions}</p>
                     <p className="text-gray-600">Completed on {new Date(selectedHistoryQuiz.createdAt).toLocaleDateString()}</p>
                 </div>
             )}
             {showResults && !isReview && (
                 <div className="bg-white p-6 rounded-2xl shadow-lg text-center border-2 border-blue-500">
                     <h2 className="text-2xl font-bold text-gray-800">Quiz Complete!</h2>
-                    <p className="text-4xl font-extrabold text-blue-600 my-2">{score} / {mcqs.length}</p>
+                    <p className="text-4xl font-extrabold text-[#20BEFF] my-2">{score} / {mcqs.length}</p>
                     <p className="text-gray-600">Great job! See your results below.</p>
                 </div>
             )}
@@ -267,7 +267,7 @@ export default function MCQGeneratorContent() {
                                 className={`p-3 text-left rounded-lg border-2 transition-all duration-300 w-full ${
                                     (showResults || isReview)
                                     ? getOptionStyle(mcq, key, { userAnswers: answers, ...mcq })
-                                    : (answers[mcq.question] === key ? 'bg-blue-500 border-blue-600 text-white shadow-md ring-2 ring-blue-500' : 'bg-white hover:bg-gray-50 border-gray-300')
+                                    : (answers[mcq.question] === key ? 'bg-[#20BEFF] border-gray-400 text-white shadow-md ring-2 ' : 'bg-white hover:bg-gray-50 border-gray-300')
                                 }`}
                             >
                                 <span className="font-bold mr-2">{key}:</span>{value}
@@ -316,10 +316,10 @@ export default function MCQGeneratorContent() {
             </div>
             
             <div className="bg-white p-4 rounded-2xl shadow-lg mb-12 border border-gray-200 flex justify-center gap-4">
-                 <button onClick={() => { setView('quiz'); setSelectedHistoryQuiz(null); setMcqs([]); setShowResults(false); setTopic(''); setUserAnswers({}); }} className={`px-6 py-2 font-bold rounded-lg transition ${view === 'quiz' ? 'bg-blue-600 text-white shadow' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}>
+                 <button onClick={() => { setView('quiz'); setSelectedHistoryQuiz(null); setMcqs([]); setShowResults(false); setTopic(''); setUserAnswers({}); }} className={`${view === 'quiz' ? 'btn-primary' : 'btn-secondary'}`}>
                     New Quiz
                 </button>
-                 <button onClick={() => setView('history')} className={`px-6 py-2 font-bold rounded-lg transition ${view === 'history' || view === 'history-detail' ? 'bg-blue-600 text-white shadow' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}>
+                 <button onClick={() => setView('history')} className={`${view === 'history' || view === 'history-detail' ? 'btn-primary' : 'btn-secondary'}`}>
                     History
                 </button>
             </div>
@@ -333,7 +333,7 @@ export default function MCQGeneratorContent() {
                                 type="button"
                                 onClick={() => setInputType('topic')}
                                 className={`w-full p-2 rounded-md font-semibold transition flex items-center justify-center ${
-                                    inputType === 'topic' ? 'bg-white text-blue-600 shadow' : 'text-gray-600'
+                                    inputType === 'topic' ? 'bg-white text-[#20BEFF] shadow' : 'text-gray-600'
                                 }`}
                             >
                                 <FaPencilAlt className="mr-2" />
@@ -343,7 +343,7 @@ export default function MCQGeneratorContent() {
                                 type="button"
                                 onClick={() => setInputType('plain_text')}
                                 className={`w-full p-2 rounded-md font-semibold transition flex items-center justify-center ${
-                                    inputType === 'plain_text' ? 'bg-white text-blue-600 shadow' : 'text-gray-600'
+                                    inputType === 'plain_text' ? 'bg-white text-[#20BEFF] shadow' : 'text-gray-600'
                                 }`}
                             >
                                 <FaKeyboard className="mr-2" />
@@ -353,7 +353,7 @@ export default function MCQGeneratorContent() {
                                 type="button"
                                 onClick={() => setInputType('pdf')}
                                 className={`w-full p-2 rounded-md font-semibold transition flex items-center justify-center ${
-                                    inputType === 'pdf' ? 'bg-white text-blue-600 shadow' : 'text-gray-600'
+                                    inputType === 'pdf' ? 'bg-white text-[#20BEFF] shadow' : 'text-gray-600'
                                 }`}
                             >
                                 <FaFilePdf className="mr-2" />
@@ -369,7 +369,7 @@ export default function MCQGeneratorContent() {
                                     value={topic}
                                     onChange={(e) => setTopic(e.target.value)}
                                     placeholder="Enter any topic..."
-                                    className="md:col-span-3 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                                    className="md:col-span-3 p-3 input-field"
                                     required
                                 />
                             )}
@@ -378,16 +378,16 @@ export default function MCQGeneratorContent() {
                                     value={paragraphText}
                                     onChange={(e) => setParagraphText(e.target.value)}
                                     placeholder="Paste your paragraph here..."
-                                    className="md:col-span-3 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition h-24"
+                                    className="md:col-span-3 p-3 input-field"
                                     required
                                 />
                             )}
                             {inputType === 'pdf' && (
-                                <div className="md:col-span-3 p-3 border border-gray-300 rounded-lg">
+                                <div className="md:col-span-3 input-field">
                                     <input
                                         type="file"
                                         onChange={(e) => setSelectedFile(e.target.files[0])}
-                                        className="text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                                        className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-[#20BEFF] hover:file:bg-blue-100"
                                         accept=".pdf,.txt,.md"
                                         required
                                     />
@@ -399,20 +399,20 @@ export default function MCQGeneratorContent() {
                                 value={numQuestions}
                                 onChange={(e) => setNumQuestions(Math.max(1, parseInt(e.target.value) || 1))}
                                 min="1" max="20"
-                                className="md:col-span-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                                className="md:col-span-1 p-3 input-field"
                                 required
                             />
                             <button
                                 type="submit"
                                 disabled={isFormInvalid()}
-                                className="md:col-span-1 bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition duration-300 font-bold shadow-md disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center h-full min-h-[50px]"
+                                className="btn-primary"
                             >
                                 {loading ? <Spinner/> : 'Generate'}
                             </button>
                         </div>
                     </form>
                     
-                    {error && <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg mb-8" role="alert"><p>{error}</p></div>}
+                    {error && <div className="error-box" role="alert"><p>{error}</p></div>}
 
                     {mcqs.length > 0 && (
                         <>

@@ -1,28 +1,27 @@
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 from pydantic import BaseModel, Field
-from langchain_groq import ChatGroq
 from typing import List, Dict, Any
 from dotenv import load_dotenv
 import streamlit as st
 from utils.structure import StudyGuide
+from groq import Groq  # ✅ added
+import os
 
 load_dotenv()
 
+
 def generate_study_materials(content: str, groq_api_key: str) -> dict:
     """
-    Generates a mind map and flashcards using LangChain and ChatGroq.
+    Generates a mind map and flashcards using Groq SDK.
     """
     try:
-        model = ChatGroq(
-            temperature=0,
-            model_name="meta-llama/llama-4-scout-17b-16e-instruct",
-            api_key=groq_api_key
-        )
+        # ✅ Initialize Groq client
+        client = Groq(api_key=groq_api_key)
 
         parser = JsonOutputParser(pydantic_object=StudyGuide)
 
-        prompt = PromptTemplate(
+        prompt_template = PromptTemplate(
             template="""
             You are a world-class AI expert at creating deeply hierarchical outlines.
             Your task is to analyze the provided text and create a comprehensive study guide in a structured JSON format.
@@ -30,17 +29,14 @@ def generate_study_materials(content: str, groq_api_key: str) -> dict:
             The study guide must contain two main keys: "mind_map" and "flashcards".
 
             1.  **mind_map**:
-                -   This must be a deeply nested JSON object representing a pure topic-subtopic hierarchy.
-                -   **Keys** must always be the name of a topic or concept.
-                -   **Values** must ALWAYS be another nested JSON object representing the sub-topics for that key.
-                -   **CRITICAL RULE: Do NOT include any descriptions, definitions, or explanations as string values.** The mind map must ONLY contain the structure of topics. If a topic has no further sub-topics, its value should be an empty object {{}}.
-                -   Your goal is to create the deepest and most exhaustive hierarchy possible, breaking down every concept from the source text into its constituent parts.
+                - Keys must always be topic names.
+                - Values must always be nested objects.
+                - NO descriptions allowed.
+                - Leaf nodes must be empty objects {{}}.
 
             2.  **flashcards**:
-                -   This must be a list of 10 insightful flashcards based on the most important information in the text.
-                -   Each flashcard should be a JSON object with a "question" and an "answer" field.
-
-            Please process the following content and generate the detailed study guide.
+                - List of 10 flashcards.
+                - Each must contain "question" and "answer".
 
             CONTENT:
             {content}
@@ -52,10 +48,28 @@ def generate_study_materials(content: str, groq_api_key: str) -> dict:
             partial_variables={"format_instructions": parser.get_format_instructions()},
         )
 
-        chain = prompt | model | parser
+        # ✅ Format prompt manually (no LCEL)
+        prompt = prompt_template.format(content=content)
 
-        response = chain.invoke({"content": content})
-        return response
+        # ✅ Groq call
+        response = client.chat.completions.create(
+            model="openai/gpt-oss-120b",
+            messages=[
+                {"role": "system", "content": "You are a structured JSON generator."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0
+        )
+
+        output_text = response.choices[0].message.content.strip()
+
+        # ✅ Clean markdown if present
+        output_text = output_text.replace("```json", "").replace("```", "").strip()
+
+        # ✅ Parse using LangChain parser
+        parsed_output = parser.parse(output_text)
+
+        return parsed_output
 
     except Exception as e:
-        return e
+        return {"error": str(e)}

@@ -62,7 +62,7 @@ export default function LoginPage() {
             </label>
             <input
               type="email"
-              className="w-full p-3 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="input-field"
               name="email"
               id="email"
               value={email}
@@ -83,7 +83,7 @@ export default function LoginPage() {
               type="password"
               name="password"
               id="password"
-              className="w-full p-3 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="input-field"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
@@ -91,7 +91,7 @@ export default function LoginPage() {
             />
           </div>
 
-          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+          {error && <p className="error-box">{error}</p>}
 
           <div className="flex items-center justify-between">
             <div className="flex items-center">
@@ -99,7 +99,7 @@ export default function LoginPage() {
                 id="remember-me"
                 name="remember-me"
                 type="checkbox"
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                className="input-field"
               />
               <label
                 htmlFor="remember-me"
@@ -117,7 +117,7 @@ export default function LoginPage() {
 
           <button
             type="submit"
-            className="w-full bg-black text-white p-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors duration-300"
+            className="btn-secondary"
           >
             Sign in
           </button>
@@ -160,7 +160,7 @@ export default function LoginPage() {
 
         <div className="text-center text-sm text-gray-500">
           Don't have an account?{" "}
-          <a href="#" className="font-medium text-blue-600 hover:underline">
+          <a href="#" className="font-medium text-[#20BEFF] hover:underline">
             Sign up for free
           </a>
         </div>

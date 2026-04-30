@@ -71,11 +71,11 @@ function StudyHistoryDisplay({
                                 value={newTopicName}
                                 onChange={(e) => setNewTopicName(e.target.value)}
                                 onKeyDown={handleKeyDown}
-                                className="flex-grow text-xl font-bold text-gray-800 p-2 border border-blue-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
+                                className="input-field"
                                 autoFocus
                             />
-                            <button onClick={onSaveEdit} className="p-2 text-green-500 hover:bg-green-100 rounded-full"><FaCheck /></button>
-                            <button onClick={onCancelEdit} className="p-2 text-red-500 hover:bg-red-100 rounded-full"><FaTimes /></button>
+                            <button onClick={onSaveEdit} className="btn-primary"><FaCheck /></button>
+                            <button onClick={onCancelEdit} className="btn-secondary"><FaTimes /></button>
                         </>
                     ) : (
                         // --- NORMAL VIEW ---
@@ -86,7 +86,7 @@ function StudyHistoryDisplay({
                                     Created on {new Date(item.createdAt).toLocaleDateString()}
                                 </p>
                             </div>
-                            <button onClick={() => onStartEdit(item)} className="p-2 text-gray-500 hover:bg-gray-200 rounded-full">
+                            <button onClick={() => onStartEdit(item)} className="btn-primary">
                                 <FaPencilAlt />
                             </button>
                         </>
@@ -328,10 +328,10 @@ export default function FlashcardsContent() {
             </header>
 
             <div className="bg-white p-3 rounded-2xl shadow-lg mb-12 border border-gray-200 flex justify-center gap-4">
-                <button onClick={resetToGenerator} className={`px-6 py-2 font-bold rounded-lg transition flex items-center justify-center gap-2 ${view === 'generator' ? 'bg-blue-600 text-white shadow' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}>
+                <button onClick={resetToGenerator} className={`${view === 'generator' ? 'btn-primary' : 'btn-secondary'}`}>
                     <FaPencilAlt /> New Study Set
                 </button>
-                <button onClick={() => setView('history')} className={`px-6 py-2 font-bold rounded-lg transition flex items-center justify-center gap-2 ${view.includes('history') ? 'bg-blue-600 text-white shadow' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}>
+                <button onClick={() => setView('history')} className={`${view.includes('history') ? 'btn-primary' : 'btn-secondary'}`}>
                     <FaHistory /> History
                 </button>
             </div>
@@ -342,17 +342,17 @@ export default function FlashcardsContent() {
                         <form onSubmit={handleSubmit} className="bg-white p-6 rounded-2xl shadow-lg border border-gray-200 space-y-6 sticky top-24">
                             <h2 className="text-2xl font-bold text-gray-800">1. Choose Your Input</h2>
                             <div className="flex flex-col sm:flex-row gap-2 bg-gray-100 rounded-lg p-1">
-                                <button type="button" onClick={() => setInputMethod('topic')} className={`w-full p-2 rounded-md font-semibold transition flex items-center justify-center ${inputMethod === 'topic' ? 'bg-white text-blue-600 shadow' : 'text-gray-600'}`}><FaPencilAlt className="mr-2"/>Topic</button>
-                                <button type="button" onClick={() => setInputMethod('plain_text')} className={`w-full p-2 rounded-md font-semibold transition flex items-center justify-center ${inputMethod === 'plain_text' ? 'bg-white text-blue-600 shadow' : 'text-gray-600'}`}><FaKeyboard className="mr-2"/>Text</button>
-                                <button type="button" onClick={() => setInputMethod('pdf')} className={`w-full p-2 rounded-md font-semibold transition flex items-center justify-center ${inputMethod === 'pdf' ? 'bg-white text-blue-600 shadow' : 'text-gray-600'}`}><FaFilePdf className="mr-2"/>PDF</button>
+                                <button type="button" onClick={() => setInputMethod('topic')} className={`w-full p-2 rounded-md font-semibold transition flex items-center justify-center ${inputMethod === 'topic' ? 'bg-white text-[#20BEFF] shadow' : 'text-gray-600'}`}><FaPencilAlt className="mr-2"/>Topic</button>
+                                <button type="button" onClick={() => setInputMethod('plain_text')} className={`w-full p-2 rounded-md font-semibold transition flex items-center justify-center ${inputMethod === 'plain_text' ? 'bg-white text-[#20BEFF] shadow' : 'text-gray-600'}`}><FaKeyboard className="mr-2"/>Text</button>
+                                <button type="button" onClick={() => setInputMethod('pdf')} className={`w-full p-2 rounded-md font-semibold transition flex items-center justify-center ${inputMethod === 'pdf' ? 'bg-white text-[#20BEFF] shadow' : 'text-gray-600'}`}><FaFilePdf className="mr-2"/>PDF</button>
                             </div>
-                            {inputMethod === 'topic' && <input type="text" value={topicName} onChange={(e) => setTopicName(e.target.value)} placeholder="e.g., Quantum Mechanics" className="w-full p-3 border border-gray-300 rounded-lg" />}
-                            {inputMethod === 'plain_text' && <textarea value={plainTextInput} onChange={(e) => setPlainTextInput(e.target.value)} placeholder="Paste your notes here..." rows="8" className="w-full p-3 border border-gray-300 rounded-lg resize-y" />}
-                            {inputMethod === 'pdf' && <input type="file" accept=".pdf" onChange={handleFileChange} className="w-full p-2 border border-gray-300 rounded-lg file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>}
-                            <button type="submit" disabled={loading} className="w-full bg-blue-600 text-white p-3 rounded-lg font-bold text-lg hover:bg-blue-700 transition shadow-lg disabled:bg-gray-400">
+                            {inputMethod === 'topic' && <input type="text" value={topicName} onChange={(e) => setTopicName(e.target.value)} placeholder="e.g., Quantum Mechanics" className="input-field" />}
+                            {inputMethod === 'plain_text' && <textarea value={plainTextInput} onChange={(e) => setPlainTextInput(e.target.value)} placeholder="Paste your notes here..." rows="8" className="input-field" />}
+                            {inputMethod === 'pdf' && <input type="file" accept=".pdf" onChange={handleFileChange} className="input-field file:bg-blue-50 file:text-[#20BEFF] hover:file:bg-blue-100"/>}
+                            <button type="submit" disabled={loading} className="btn-primary">
                                 {loading ? 'Generating...' : 'Generate & Save'}
                             </button>
-                            {error && <div className="text-red-600 bg-red-100 p-3 rounded-lg text-center">{error}</div>}
+                            {error && <div className="error-box">{error}</div>}
                         </form>
                     </div>
                     <div className="lg:col-span-3 space-y-8">
@@ -414,7 +414,7 @@ export default function FlashcardsContent() {
                                             if (e.key === 'Enter') handleTopicUpdate();
                                             if (e.key === 'Escape') setEditingTopicId(null);
                                         }}
-                                        className="text-3xl font-bold text-gray-800 p-2 border border-blue-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 flex-grow"
+                                        className="input-field"
                                         autoFocus
                                     />
                                     <button onClick={handleTopicUpdate} className="p-2 text-green-500 hover:bg-green-100 rounded-full"><FaCheck /></button>
@@ -431,18 +431,18 @@ export default function FlashcardsContent() {
 
                             <div>
                                 {isEditing ? (
-                                    <button onClick={handleSaveChanges} className="save-changes-btn">
+                                    <button onClick={handleSaveChanges} className="btn-primary">
                                         Save Changes
                                     </button>
                                 ) : (
-                                    <button onClick={handleEditToggle} disabled={currentFlashcards.length === 0} className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg font-semibold text-sm hover:bg-gray-300 disabled:opacity-50 flex items-center gap-2">
+                                    <button onClick={handleEditToggle} disabled={currentFlashcards.length === 0} className="px-4 py-2 bg-gray-200 text-[#20BEFF] rounded-lg font-semibold text-sm hover:bg-gray-300 disabled:opacity-50 flex items-center gap-2">
                                         <FaPencilAlt /> Edit
                                     </button>
                                 )}
                             </div>
                         </div>
 
-                        {error && <div className="text-red-600 bg-red-100 p-3 rounded-lg text-center mb-4">{error}</div>}
+                        {error && <div className="error-box">{error}</div>}
 
                         {isEditing ? (
                              <div className="flashcard-editor space-y-4">

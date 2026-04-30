@@ -1,3 +1,4 @@
+// /yt-summarizer
 "use client";
 
 import { useState } from "react";
@@ -76,6 +77,7 @@ function YTSummarizerContent() {
               value={youtubeUrl}
               onChange={(e) => setYoutubeUrl(e.target.value)}
               placeholder="https://www.youtube.com/watch?v=..."
+              // cannot use input-filed duw to yt logo
               className="w-full p-4 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
               required
             />
@@ -83,13 +85,13 @@ function YTSummarizerContent() {
           <button
             type="submit"
             disabled={loading}
-            className="bg-blue-600 text-white p-4 rounded-lg hover:bg-blue-700 transition duration-300 font-bold shadow-md disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center w-full md:w-auto px-8"
+            className="btn-primary shadow-md disabled:bg-gray-400 disabled:cursor-not-allowed  md:w-auto px-8"
           >
             {loading ? "Summarizing..." : "Generate"}
           </button>
         </form>
         {error && (
-          <p className="text-red-500 mt-4 text-center font-semibold">{error}</p>
+          <p className="error-box">{error}</p>
         )}
       </div>
 
@@ -137,7 +139,7 @@ export default function YTSummarizerPage() {
 
   return (
     <div className="bg-gray-100 min-h-screen">
-      <NavBar toggleSidebar={toggleSidebar} />
+      {/* <NavBar toggleSidebar={toggleSidebar} /> */}
       <div className="flex pt-16">
         <main
           className={`flex-1 transition-all duration-300 ${

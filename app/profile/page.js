@@ -164,19 +164,19 @@ export default function UserProfilePage() {
                                 <div className="md:col-span-2 space-y-6">
                                     <div>
                                         <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                                        <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="e.g., Vikrant Pandey" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
+                                        <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="e.g., Vikrant Pandey" className="input-field" />
                                     </div>
                                     <div>
                                         <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">Location</label>
-                                        <input type="text" name="location" value={formData.location} onChange={handleChange} placeholder="e.g., Mumbai, India" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"  />
+                                        <input type="text" name="location" value={formData.location} onChange={handleChange} placeholder="e.g., Mumbai, India" className="input-field"  />
                                     </div>
                                     <div>
                                         <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                                        <input type="email" name="email" value={user?.email || ''} required className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 cursor-not-allowed" readOnly />
+                                        <input type="email" name="email" value={user?.email || ''} required className="input-field" readOnly />
                                     </div>
                                     <div>
                                         <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                                        <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+91 00000 11111" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
+                                        <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+91 00000 11111" className="input-field" />
                                     </div>
                                 </div>
                             </div>
@@ -219,8 +219,8 @@ export default function UserProfilePage() {
                                 </div>
                             </div>
                             <div className="mt-8 flex justify-end gap-4">
-                                <button type="button" className="px-6 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">Cancel</button>
-                                <button type="submit" disabled={isLoading} className="px-6 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition shadow-sm disabled:bg-blue-400 disabled:cursor-not-allowed">
+                                <button type="button" className="btn-secondary">Cancel</button>
+                                <button type="submit" disabled={isLoading} className="btn-primary shadow-sm disabled:bg-blue-400 disabled:cursor-not-allowed">
                                     {isLoading ? 'Saving...' : 'Save Changes'}
                                 </button>
                             </div>

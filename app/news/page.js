@@ -1,3 +1,4 @@
+// /news
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -173,9 +174,9 @@ export default function NewsPage() {
 
     return (
         <div className="bg-gray-50 min-h-screen">
-            <NavBar toggleSidebar={toggleSidebar} />
+            {/* <NavBar toggleSidebar={toggleSidebar} /> */}
             <div className="flex pt-16">
-                <Sidebar isOpen={isSidebarOpen} />
+                {/* <Sidebar isOpen={isSidebarOpen} /> */}
                 <main className={`flex-1 transition-all duration-300 ${isSidebarOpen ? 'lg:ml-64' : 'ml-0'}`}>
                     <NewsContent />
                 </main>

@@ -16,3 +16,4 @@ ddgs
 fpdf
 openai
 langchain-openai
+langchain-google-genai

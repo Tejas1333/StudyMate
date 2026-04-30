@@ -3,7 +3,7 @@ import sys
 import json
 import logging
 from youtube_utils import extract_video_id, get_transcript_and_summary
-from pinecone_utils import create_chroma_collection, index_documents # Assuming these are needed for context
+# from pinecone_utils import index_documents # Assuming these are needed for context
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 # Setup logging (optional, but good for debugging)

@@ -15,7 +15,7 @@ function DownloadButton({ pdfData, fileName }) {
   return (
     <button
       onClick={handleDownload}
-      className="mt-2 px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition shadow-md"
+      className="btn-secondary"
     >
       📥 Download PDF: {fileName}
     </button>
@@ -230,12 +230,12 @@ export default function ChatPage() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask a question or enter a topic..."
-          className="flex-grow p-3 border border-gray-300 rounded-full focus:outline-none focus:ring-4 focus:ring-[#20BEFF]/50 transition"
+          className="input-field"
         />
         <button
           type="submit"
           disabled={loading || !input.trim()}
-          className="flex-shrink-0 bg-[#20BEFF] text-white p-3 rounded-full hover:bg-blue-600 transition font-bold shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed transform hover:scale-105"
+          className="btn-primary"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -172,3 +172,74 @@
     transform: translateY(-1px);
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
+
+/* ============================= */
+/* GLOBAL DESIGN SYSTEM */
+/* ============================= */
+
+:root {
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --bg: #f9fafb;
+  --card: #ffffff;
+  --text: #1f2937;
+  --subtext: #6b7280;
+}
+
+/* Base */
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+}
+
+/* Typography */
+h1 {
+  @apply text-4xl md:text-5xl font-extrabold;
+}
+
+h2 {
+  @apply text-xl font-semibold;
+}
+
+/* ============================= */
+/* REUSABLE COMPONENT CLASSES */
+/* ============================= */
+
+.card {
+  @apply bg-white rounded-2xl p-6 border border-gray-200 shadow-md 
+         hover:shadow-xl transition-all duration-300;
+}
+
+.btn-primary {
+  @apply bg-[#20BEFF] text-white px-5 py-3 rounded-xl font-semibold
+         hover:bg-[#1AA8E0] hover:scale-105 active:scale-95
+         transition-all duration-200 shadow-md;
+}
+
+.btn-secondary {
+  @apply bg-gray-200 text-gray-700 px-4 py-2 rounded-xl
+         hover:bg-gray-300 transition;
+}
+
+.input-field {
+  @apply w-full px-4 py-3 rounded-xl border border-gray-300
+         focus:ring-2 focus:ring-blue-400 outline-none transition;
+}
+
+.chip {
+  @apply px-4 py-2 rounded-full bg-gray-100 text-gray-700
+         hover:bg-blue-100 hover:text-blue-600 transition;
+}
+
+.chip-active {
+  @apply bg-blue-500 text-white;
+}
+
+.error-box {
+  @apply bg-red-50 text-red-600 p-3 rounded-lg text-sm;
+}
+
+.empty-state {
+  @apply text-center text-gray-400 py-10;
+}
