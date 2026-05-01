@@ -3,12 +3,15 @@ import sys
 import json
 import logging
 from youtube_utils import extract_video_id, get_transcript_and_summary
-# from pinecone_utils import index_documents # Assuming these are needed for context
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+# from pinecones import create_chroma_collection, index_documents # Assuming these are needed for context
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 # Setup logging (optional, but good for debugging)
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# yt-url = "https://www.youtube.com/watch?v=XGa4onZP66Q&t=2s"
+# youtube_url
 
 def process_video_and_output_json(youtube_url: str):
     """
@@ -43,12 +46,20 @@ def process_video_and_output_json(youtube_url: str):
         return json.dumps({"error": f"Failed to summarize video: {str(e)}"})
 
 if __name__ == "__main__":
-    # Read input from stdin
+    """
+    take data as JSON input from stdin, process the video, and output the result as JSON to stdout.
+    Expected input format:
+    {"action":"process_video",
+    "query":"https://www.youtube.com/watch?v=4pUYfY-b5CQ"}
+    """
     input_data = sys.stdin.read()
     request = json.loads(input_data)
     
     # Extract the query (YouTube URL)
     youtube_url = request.get("query")
+    ai_task = request.get("aiTask")
+
+    # youtube_url = "https://www.youtube.com/watch?v=XGa4onZP66Q&t=2s"
 
     if not youtube_url:
         print(json.dumps({"error": "No YouTube URL provided in the request."}))

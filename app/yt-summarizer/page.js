@@ -2,8 +2,8 @@
 "use client";
 
 import { useState } from "react";
-import NavBar from "../../components/NavBar"; 
-import Sidebar from "../../components/Sidebar"; 
+import NavBar from "../../components/NavBar";
+import Sidebar from "../../components/Sidebar";
 import "../../styles/globals.css";
 import { FaYoutube, FaFileAlt, FaListUl } from "react-icons/fa";
 
@@ -11,6 +11,7 @@ function YTSummarizerContent() {
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [summary, setSummary] = useState("");
   const [transcript, setTranscript] = useState("");
+  const [showTranscript, setShowTranscript] = useState(false);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -31,14 +32,15 @@ function YTSummarizerContent() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          aiTask: "yt-summarizer", 
+          aiTask: "yt-summarizer",
           query: youtubeUrl,
         }),
       });
 
       const data = await res.json();
 
-      if (res.ok && data.Summary) { // <-- REMOVED .response
+      if (res.ok && data.Summary) {
+        // <-- REMOVED .response
         setSummary(data.Summary.summary); // <-- REMOVED .response
         setTranscript(data.Summary.transcript); // <-- REMOVED .response
       } else {
@@ -46,7 +48,7 @@ function YTSummarizerContent() {
       }
     } catch (err) {
       setError(
-        "Failed to connect to the summarizer service. Please try again later."
+        "Failed to connect to the summarizer service. Please try again later.",
       );
     } finally {
       setLoading(false);
@@ -54,7 +56,7 @@ function YTSummarizerContent() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8">
       <header className="text-center mb-12">
         <h1 className="text-5xl font-extrabold text-gray-900 mb-3">
           AI YouTube Summarizer
@@ -90,11 +92,8 @@ function YTSummarizerContent() {
             {loading ? "Summarizing..." : "Generate"}
           </button>
         </form>
-        {error && (
-          <p className="error-box">{error}</p>
-        )}
+        {error && <p className="error-box">{error}</p>}
       </div>
-
 
       <div className="grid grid-cols-1 gap-8">
         <section className="bg-white p-6 rounded-2xl shadow-lg border border-gray-200">
@@ -126,8 +125,32 @@ function YTSummarizerContent() {
             )}
             {transcript}
           </div>
-        </section> 
-        */}
+        </section>  */}
+
+        <section className="bg-white p-6 rounded-2xl shadow-lg border border-gray-200">
+          <button
+            onClick={() => setShowTranscript(!showTranscript)}
+            className="w-full flex justify-between items-center text-xl font-bold text-gray-800"
+          >
+            <span className="flex items-center">
+              <FaListUl className="mr-3 text-blue-500" /> Transcript
+            </span>
+            <span className="text-lg">{showTranscript ? "▲" : "▼"}</span>
+          </button>
+
+          {/* Dropdown content */}
+          {showTranscript && (
+            <div className="mt-4 h-96 overflow-y-auto bg-gray-50 border border-gray-200 rounded-lg p-4 text-gray-600 leading-relaxed whitespace-pre-wrap">
+              {loading && !transcript && <p>Fetching transcript...</p>}
+              {!loading && !transcript && (
+                <p className="text-gray-500">
+                  The full video transcript will appear here.
+                </p>
+              )}
+              {transcript}
+            </div>
+          )}
+        </section>
       </div>
     </div>
   );
@@ -142,9 +165,7 @@ export default function YTSummarizerPage() {
       {/* <NavBar toggleSidebar={toggleSidebar} /> */}
       <div className="flex pt-16">
         <main
-          className={`flex-1 transition-all duration-300 ${
-            isSidebarOpen ? "lg:ml-64" : "ml-0"
-          }`}
+          className="flex-1 transition-all duration-300 flex justify-center"
         >
           <YTSummarizerContent />
         </main>

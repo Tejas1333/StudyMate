@@ -116,7 +116,7 @@ function NewsContent() {
     }
     
     return (
-        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8">
             <header className="text-center mb-12 bg-white p-8 rounded-2xl shadow-sm border border-gray-200/80">
                 <div className={`inline-flex items-center justify-center h-12 w-12 rounded-full ${userProfile?.desiredRole ? 'bg-blue-100 text-blue-600' : 'bg-gray-200 text-gray-600'} mb-4`}>
                     {userProfile?.desiredRole ? <FaUser className="h-6 w-6" /> : <FaBroadcastTower className="h-6 w-6" />}
@@ -177,7 +177,7 @@ export default function NewsPage() {
             {/* <NavBar toggleSidebar={toggleSidebar} /> */}
             <div className="flex pt-16">
                 {/* <Sidebar isOpen={isSidebarOpen} /> */}
-                <main className={`flex-1 transition-all duration-300 ${isSidebarOpen ? 'lg:ml-64' : 'ml-0'}`}>
+                <main className="flex-1 transition-all duration-300 flex justify-center">
                     <NewsContent />
                 </main>
             </div>

@@ -1,18 +1,13 @@
-from openai import OpenAI
 from typing import List, Tuple
-import time
-import os
 
 from langchain_community.vectorstores import Chroma
 from langchain_core.documents import Document
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
+
+import os
 from groq import Groq
-
 from dotenv import load_dotenv
-# Load environment variables
 load_dotenv()
-
-
 
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
@@ -58,31 +53,6 @@ If answer is not found, say "Not available in context."
 
     return response.choices[0].message.content.strip()
 
-
-COLLECTION_NAME = "academic_data"
-os.makedirs("./YT_VECTOR", exist_ok=True)
-
-
-vector_store = Chroma(
-    collection_name=COLLECTION_NAME,
-    embedding_function=embedding,
-    persist_directory="./YT_VECTOR"
-)
-
-# # API configuration
-# A4F_API_KEY = "ddc-a4f-6816dbcca1a1426180a107549f8e7418"
-# A4F_API_URL = "https://api.a4f.co/v1"
-# openai_client = OpenAI(api_key=A4F_API_KEY, base_url=A4F_API_URL)
-
-# def get_embedding(text: str) -> List[float]:
-#     """Generate embedding for a given text using OpenAI."""
-#     time.sleep(10)
-#     response = openai_client.embeddings.create(
-#         input=text,
-#         model="provider-6/qwen3-embedding-4b"
-#     )
-#     return response.data[0].embedding
-
 # def generate_answer(query: str, retrieved_docs: List[Tuple[str, float]]) -> str:
 #     """Generate answer using OpenAI GPT model with retrieved documents."""
 #     context = "\n".join([doc[0] for doc in retrieved_docs])
@@ -97,3 +67,13 @@ vector_store = Chroma(
 #         max_tokens=500
 #     )
 #     return response.choices[0].message.content.strip()
+
+COLLECTION_NAME = "academic_data"
+os.makedirs("./YT_VECTOR", exist_ok=True)
+
+
+vector_store = Chroma(
+    collection_name=COLLECTION_NAME,
+    embedding_function=embedding,
+    persist_directory="./YT_VECTOR"
+)

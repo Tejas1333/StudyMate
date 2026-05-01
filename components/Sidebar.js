@@ -24,12 +24,12 @@ export default function Sidebar({ isOpen }) {
 transition-all duration-300 ease-in-out z-0
 ${isOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0 pointer-events-none hidden'}`}
     >
-      <ul className="space-y-3 text-sm text-gray-800">
+      <ul className="space-y-3 text-base text-gray-700 font-medium">
         {menuItems.map(item => (
           <li key={item.name}>
             <Link
               href={item.path}
-              className="block hover:text-blue-600 hover:bg-gray-100 rounded-md px-2 py-1 transition duration-150 cursor-pointer"
+              className="block hover:text-[#20BEFF] hover:bg-gray-100 rounded-md px-3 py-2 transition"
             >
               {item.name}
             </Link>

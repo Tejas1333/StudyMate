@@ -212,13 +212,13 @@ h2 {
 }
 
 .btn-primary {
-  @apply bg-[#20BEFF] text-white px-5 py-3 rounded-xl font-semibold
+  @apply bg-[#20BEFF] text-white px-5 py-3 rounded-xl font-semibold flex items-center gap-4
          hover:bg-[#1AA8E0] hover:scale-105 active:scale-95
          transition-all duration-200 shadow-md;
 }
 
 .btn-secondary {
-  @apply bg-gray-200 text-gray-700 px-4 py-2 rounded-xl
+  @apply bg-gray-200 text-gray-700 px-4 py-2 rounded-xl flex items-center gap-4
          hover:bg-gray-300 transition;
 }
 

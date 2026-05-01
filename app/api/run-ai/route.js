@@ -53,21 +53,21 @@ export async function POST(req) {
         process.cwd(),
         "ai_code",
         "doubt-solving",
-        "main.py"
+        "main.py",
       );
     } else if (aiTask === "flashcards_mindmap") {
       pythonScriptPath = path.join(
         process.cwd(),
         "ai_code",
         "flashcards-mindmap",
-        "main.py"
+        "main.py",
       );
     } else if (aiTask === "career") {
       pythonScriptPath = path.join(
         process.cwd(),
         "ai_code",
         "career",
-        "main.py"
+        "main.py",
       );
     } else if (aiTask === "mcq") {
       pythonScriptPath = path.join(process.cwd(), "ai_code", "mcq", "main.py");
@@ -76,15 +76,17 @@ export async function POST(req) {
         process.cwd(),
         "ai_code",
         "yt-summarizer", // Ensure this path is correct for your yt-summarizer main.py
-        "main.py"
+        "main.py",
       );
     } else {
-      return new Response(JSON.stringify({ error: `Unknown AI task: ${aiTask}` }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
+      return new Response(
+        JSON.stringify({ error: `Unknown AI task: ${aiTask}` }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        },
+      );
     }
-
 
     const python = spawn("python", [pythonScriptPath]);
 
@@ -112,11 +114,9 @@ export async function POST(req) {
       });
     });
 
-    if (error) {
-      console.error("Python stderr:", error);
-      return new Response(JSON.stringify({ error: "Python Error: " + error }), {
+    if (error && !result) {
+      return new Response(JSON.stringify({ error: error }), {
         status: 500,
-        headers: { "Content-Type": "application/json" },
       });
     }
 
@@ -133,7 +133,8 @@ export async function POST(req) {
       // --- CRITICAL FIX FOR YT-SUMMARIZER & GEN-NOTES ---
       // If the Python script returns an object with `isPdf` or `Summary` at the top level,
       // forward that entire object. Otherwise, wrap it in a 'response' key as before.
-      if (output.isPdf || output.Summary) { // Check for 'Summary' key
+      if (output.isPdf || output.Summary) {
+        // Check for 'Summary' key
         return new Response(JSON.stringify(output), {
           status: 200,
           headers: { "Content-Type": "application/json" },
@@ -145,9 +146,11 @@ export async function POST(req) {
         status: 200,
         headers: { "Content-Type": "application/json" },
       });
-
     } catch (err) {
-      console.error("Failed to parse Python output or invalid output format:", err);
+      console.error(
+        "Failed to parse Python output or invalid output format:",
+        err,
+      );
       return new Response(
         JSON.stringify({
           error: "Failed to parse Python output or invalid output format",
@@ -156,7 +159,7 @@ export async function POST(req) {
         {
           status: 500,
           headers: { "Content-Type": "application/json" },
-        }
+        },
       );
     }
   } catch (err) {
@@ -166,7 +169,7 @@ export async function POST(req) {
       {
         status: 500,
         headers: { "Content-Type": "application/json" },
-      }
+      },
     );
   } finally {
     if (tempFilePath) {

@@ -6,6 +6,12 @@ import NavBar from '@/components/NavBar';
 import Sidebar from '@/components/Sidebar';
 import Footer from '@/components/Footer'
 // import './globals.css';
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ 
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700']
+});
 
 export default function RootLayout({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -16,7 +22,7 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body className="bg-gray-50">
+      <body className={`${inter.className}bg-gray-50`}>
         <SessionWrapper>
           <NavBar toggleSidebar={toggleSidebar} />
           <div className="flex pt-16">
