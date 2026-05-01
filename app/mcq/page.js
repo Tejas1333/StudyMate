@@ -206,7 +206,7 @@ export default function MCQGeneratorContent() {
         };
 
         try {
-            const res = await fetch('/api/quiz-history', {
+            const res = await fetch('/api/mcq', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(quizResult),

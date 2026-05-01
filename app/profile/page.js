@@ -41,7 +41,7 @@ export default function UserProfilePage() {
         if (status === 'authenticated') {
             const fetchProfile = async () => {
                 try {
-                    const response = await fetch('/api/get-profile');
+                    const response = await fetch('/api/profile');
                     if (!response.ok) {
                         // Don't throw an error for 404, it just means no profile exists yet
                         if (response.status === 404) {

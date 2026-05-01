@@ -29,7 +29,7 @@ const InitialPage = () => {
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight">
             Stop Studying Harder. <br />
-            <span className="text-blue-600">Start Studying Smarter.</span>
+            <span className="text-[#20BEFF]">Start Studying Smarter.</span>
           </h1>
           <p className="mt-6 text-lg text-gray-600 max-w-2xl mx-auto">
             From instant doubt-solving to personalized career guidance,
@@ -38,13 +38,13 @@ const InitialPage = () => {
           </p>
 
           {session ? (
-            <button className="mt-12 px-8 py-4 bg-blue-600 text-white font-bold rounded-lg shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105">
+            <button className="mt-12 px-8 py-4 bg-[#20BEFF] text-white font-bold rounded-lg shadow-lg hover:bg-[#20BEFF] transition duration-300 transform hover:scale-105">
               Welcome To StudyMate
             </button>
           ) : (
             <Link
               href="/login"
-              className="inline-block mt-10 px-8 py-4 bg-blue-600 text-white font-bold rounded-lg shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105"
+              className="inline-block mt-10 px-8 py-4 bg-[#20BEFF] text-white font-bold rounded-lg shadow-lg hover:bg-[#20BEFF] transition duration-300 transform hover:scale-105"
             >
               Get Started for Free
             </Link>
@@ -59,7 +59,7 @@ const InitialPage = () => {
           </h2>
           <div className="grid md:grid-cols-3 gap-10 text-center">
             <div className="p-6">
-              <div className="bg-blue-100 text-blue-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl font-bold">
+              <div className="bg-blue-100 text-[#20BEFF] w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl font-bold">
                 1
               </div>
               <h3 className="text-xl font-semibold mb-2">Input Your Query</h3>
@@ -69,7 +69,7 @@ const InitialPage = () => {
               </p>
             </div>
             <div className="p-6">
-              <div className="bg-blue-100 text-blue-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl font-bold">
+              <div className="bg-blue-100 text-[#20BEFF] w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl font-bold">
                 2
               </div>
               <h3 className="text-xl font-semibold mb-2">AI Processing</h3>
@@ -79,7 +79,7 @@ const InitialPage = () => {
               </p>
             </div>
             <div className="p-6">
-              <div className="bg-blue-100 text-blue-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl font-bold">
+              <div className="bg-blue-100 text-[#20BEFF] w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl font-bold">
                 3
               </div>
               <h3 className="text-xl font-semibold mb-2">
@@ -197,7 +197,7 @@ const InitialPage = () => {
       </section>
 
       {session ? (
-        <section className="py-20 px-4 bg-blue-600 text-white mt-12 rounded-lg shadow-lg">
+        <section className="py-20 px-4 bg-[#20BEFF] text-white mt-12 rounded-lg shadow-lg">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-4xl font-bold">Welcome Back!</h2>
             <p className="mt-4 text-lg text-blue-100">
@@ -207,7 +207,7 @@ const InitialPage = () => {
           </div>
         </section>
       ) : (
-        <section className="py-20 px-4 bg-blue-600 text-white">
+        <section className="py-20 px-4 bg-[#20BEFF] text-white">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-4xl font-bold">Ready to Get Started?</h2>
             <p className="mt-4 text-lg text-blue-100">
@@ -216,7 +216,7 @@ const InitialPage = () => {
             </p>
             <Link
               href="/login"
-              className="inline-block mt-8 px-8 py-4 bg-white text-blue-600 font-bold rounded-lg shadow-lg hover:bg-gray-100 transition duration-300 transform hover:scale-105"
+              className="inline-block mt-8 px-8 py-4 bg-white text-[#20BEFF] font-bold rounded-lg shadow-lg hover:bg-gray-100 transition duration-300 transform hover:scale-105"
             >
               Sign Up for Free
             </Link>
@@ -229,7 +229,7 @@ const InitialPage = () => {
 
 const FeatureCard = ({ icon, title, description }) => (
   <div className="bg-white p-8 rounded-lg shadow-md border border-gray-200 hover:shadow-xl hover:border-blue-300 transition-all duration-300">
-    <div className="text-4xl text-blue-600 mb-4">{icon}</div>
+    <div className="text-4xl text-[#20BEFF] mb-4">{icon}</div>
     <h3 className="text-xl font-bold mb-2">{title}</h3>
     <p className="text-gray-600">{description}</p>
   </div>
