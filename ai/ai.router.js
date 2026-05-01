@@ -1,5 +1,6 @@
 // ai/ai.router.js
 import path from "path";
+import { handleError } from "@/lib/errorHandler";
 
 export const getPythonScriptPath = (aiTask) => {
   const base = path.join(process.cwd(), "ai_code");

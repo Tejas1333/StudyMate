@@ -16,6 +16,26 @@ export const runAIService = async (req) => {
       const formData = await req.formData();
 
       const file = formData.get("file");
+
+      // // validating the file
+      // const allowedTypes = ["application/pdf", "image/png", "image/jpeg"];
+
+      // if (!file) {
+      //   throw new Error("No file uploaded");
+      // }
+
+      // if (!allowedTypes.includes(file.type)) {
+      //   const err = new Error("Invalid file type");
+      //   err.statusCode = 400;
+      //   throw err;
+      // }
+
+      // if (file.size > 5 * 1024 * 1024) {
+      //   // 5MB
+      //   const err = new Error("File too large");
+      //   err.statusCode = 400;
+      //   throw err;
+      // }
       aiTask = formData.get("aiTask");
 
       const queryStr = formData.get("query");
@@ -25,7 +45,6 @@ export const runAIService = async (req) => {
 
       tempFilePath = await handleFileUpload(file);
       query.filePath = tempFilePath;
-
     } else {
       const body = await req.json();
       aiTask = body.aiTask;
@@ -40,7 +59,6 @@ export const runAIService = async (req) => {
     });
 
     return parsePythonOutput(result);
-
   } finally {
     await cleanupFile(tempFilePath);
   }

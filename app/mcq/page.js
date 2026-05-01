@@ -104,7 +104,7 @@ export default function MCQGeneratorContent() {
             setHistoryLoading(true);
             setHistoryError('');
             try {
-                const res = await fetch('/api/quiz-history'); 
+                const res = await fetch('/api/mcq'); 
                 if (!res.ok) throw new Error('Failed to fetch quiz history.');
                 const data = await res.json();
                 setQuizHistory(data.history || []);

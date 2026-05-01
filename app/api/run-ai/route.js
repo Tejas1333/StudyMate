@@ -1,8 +1,18 @@
 // app/api/run-ai/route.js
 import { runAIService } from "@/ai/ai.service";
+import { rateLimit } from "@/lib/rateLimit";
+import { handleError } from "@/lib/errorHandler";
 
 export async function POST(req) {
   try {
+     const ip =
+      req.headers.get("x-forwarded-for") ||
+      req.headers.get("x-real-ip") ||
+      "unknown";
+
+    rateLimit(ip, 10, 60000); // 10 req/min
+
+
     const output = await runAIService(req);
 
     return new Response(JSON.stringify(output), {
@@ -11,9 +21,6 @@ export async function POST(req) {
     });
 
   } catch (err) {
-    return new Response(JSON.stringify({ error: err.message }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    return handleError(err);
   }
 }
