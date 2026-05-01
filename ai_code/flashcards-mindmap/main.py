@@ -47,7 +47,7 @@ def run_model(input_method, content, file_name=None):
 
         if isinstance(con, dict):
             flashcards = con.get('flashcards', [])
-            mind_map = con.get('mindMap', {}) 
+            mind_map = con.get('mind_map', {}) 
         else:
             print(f"API call failed. Received error: {con}", file=sys.stderr)
             # Return empty data if AI fails

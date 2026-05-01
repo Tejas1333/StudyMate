@@ -9,5 +9,9 @@ export const getQuizHistoryController = async () => {
 
 export const createQuizController = async (req) => {
   const body = await req.json();
+
+  // 🔥 DEBUG (IMPORTANT)
+  console.log("🔥 Incoming quiz save:", body);
+
   return await createQuizService(body);
 };

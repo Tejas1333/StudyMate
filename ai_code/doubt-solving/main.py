@@ -39,7 +39,9 @@ if __name__ == "__main__":
             )
             ai_response_str = get_groq_response(user_query, system_prompt)
             cleaned_str = re.sub(r'^```json\s*|\s*```$', '', ai_response_str.strip())
+            # print("DEBUG RAW AI:", ai_response_str)
             notes_json = json.loads(cleaned_str)
+            
             pdf_bytes = generate_pdf_from_json(notes_json)
             pdf_b64 = base64.b64encode(pdf_bytes).decode('utf-8')
             display_text = ""

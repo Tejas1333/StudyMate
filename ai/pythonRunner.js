@@ -20,6 +20,8 @@ export const runPythonScript = (scriptPath, payload) => {
     python.stdin.end();
 
     python.on("close", () => {
+      console.log("🐍 RAW OUTPUT:", result); // ADD THIS
+
       if (error && !result) return reject(error);
       resolve(result);
     });

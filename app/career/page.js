@@ -14,6 +14,8 @@ import {
   FaBuilding,
   FaComments,
 } from "react-icons/fa";
+import remarkGfm from "remark-gfm";
+
 
 function CareerGuidanceContent() {
   const [careerName, setCareerName] = useState("");
@@ -241,7 +243,7 @@ function CareerGuidanceContent() {
                             <div
                               className={`prose max-w-lg p-3 rounded-2xl ${msg.role === "user" ? "bg-blue-500 text-white prose-invert" : "bg-gray-200 text-gray-800"}`}
                             >
-                              <ReactMarkdown>{msg.content}</ReactMarkdown>
+                              <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
                             </div>
                           </div>
                         ))}
@@ -275,7 +277,7 @@ function CareerGuidanceContent() {
                     </div>
                   ) : (
                     <div className="prose max-w-none">
-                      <ReactMarkdown>
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>
                         {tab.content ||
                           `No content available for ${tab.label}.`}
                       </ReactMarkdown>

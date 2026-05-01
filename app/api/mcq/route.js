@@ -6,7 +6,7 @@ import {
   createQuizController
 } from "@/controllers/quiz.controller";
 
-// 🔹 GET QUIZ HISTORY
+// 🔹 GET → FETCH HISTORY
 export async function GET() {
   try {
     await dbConnect();
@@ -23,7 +23,7 @@ export async function GET() {
   }
 }
 
-// 🔹 CREATE QUIZ
+// 🔹 POST → SAVE QUIZ
 export async function POST(req) {
   try {
     await dbConnect();

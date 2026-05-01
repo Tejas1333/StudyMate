@@ -6,9 +6,22 @@ export const getQuizHistoryService = async () => {
 };
 
 export const createQuizService = async (body) => {
-  // (Optional) basic validation — extend later with Zod
   if (!body) {
     throw new Error("INVALID_BODY");
+  }
+
+  // 🔴 IMPORTANT VALIDATION
+  const {
+    topic,
+    score,
+    totalQuestions,
+    questions,
+    userAnswers,
+    inputType
+  } = body;
+
+  if (!topic || !questions || !userAnswers || !inputType) {
+    throw new Error("MISSING_REQUIRED_FIELDS");
   }
 
   try {
